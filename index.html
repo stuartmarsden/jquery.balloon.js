@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>jquery.balloon.js Demo page</title>
 		<link rel="stylesheet" href="style.css" type="text/css" />
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery.tile.js"></script>
 		<script type="text/javascript" src="js/jquery.balloon.js"></script>
     <script type="text/javascript">
@@ -366,7 +366,11 @@
 		<h3>Advanced methods showBalloon(<var>options</var>), hideBalloon(<var>options</var>)</h3>
 		<script>
 			$(function() {
-				$("#advanced-methods > img").showBalloon({
+				var shown = true;
+				$("#advanced-methods > img").on("click", function() {
+					shown ? $(this).hideBalloon() : $(this).showBalloon();
+					shown = !shown;
+				}).showBalloon({
 					position: "left",
 					offsetX: 50,
 					offsetY: 50,
@@ -379,7 +383,7 @@
 						fontSize: "130%",
 						backgroundColor: "#efefef"
 					}
-				}).toggle(function() { $(this).hideBalloon(); }, function() { $(this).showBalloon(); });
+				});
 			});
 		</script>
 		<div id="advanced-methods">
@@ -390,10 +394,11 @@
 			<p>All methods of this plugin return jQuery object to chain methods.</p>
 			<code class="basic-code">
 				$(function() {<br />
-				&nbsp;&nbsp;$('#knight').<span class="keyword">showBalloon</span>({ ... }).toggle(<br />
-				&nbsp;&nbsp;&nbsp;&nbsp;function(){ $(this).<span class="keyword">hideBalloon</span>(); },<br />
-				&nbsp;&nbsp;&nbsp;&nbsp;function(){ $(this).<span class="keyword">showBalloon</span>(); }<br />
-				&nbsp;&nbsp;);<br />
+				&nbsp;&nbsp;var shown = true;<br />
+				&nbsp;&nbsp;$('#knight').on("click", function() {<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;shown ? $(this).<span class="keyword">hideBalloon</span>() : $(this).<span class="keyword">showBalloon</span>();<br />
+				&nbsp;&nbsp;&nbsp;&nbsp;shown = !shown;<br />
+				&nbsp;&nbsp;}).<span class="keyword">showBalloon</span>({ ... });
 				});
 			</code>
 		</div>
