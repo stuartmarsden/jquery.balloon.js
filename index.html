@@ -366,20 +366,22 @@
 		<h3>Advanced methods showBalloon(<var>options</var>), hideBalloon(<var>options</var>)</h3>
 		<script>
 			$(function() {
-				$("#advanced-methods > img").showBalloon({
-					position: "left",
-					offsetX: 50,
-					offsetY: 50,
-					tipSize: 20,
-					css: {
-						maxWidth: "17em",
-						border: "solid 5px #463974",
-						color: "#463974",
-						fontWeight: "bold",
-						fontSize: "130%",
-						backgroundColor: "#efefef"
-					}
-				}).toggle(function() { $(this).hideBalloon(); }, function() { $(this).showBalloon(); });
+				$("#advanced-methods > img").toggle(function() { $(this).hideBalloon(); }, function() {
+					$(this).showBalloon({
+						position: "left",
+						offsetX: 50,
+						offsetY: 50,
+						tipSize: 20,
+						css: {
+							maxWidth: "17em",
+							border: "solid 5px #463974",
+							color: "#463974",
+							fontWeight: "bold",
+							fontSize: "130%",
+							backgroundColor: "#efefef"
+						}
+					});
+				});
 			});
 		</script>
 		<div id="advanced-methods">
