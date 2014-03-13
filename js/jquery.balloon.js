@@ -196,12 +196,12 @@
     }
     options = this.data("options");
     return this.each(function() {
+      var isNew, contents;
       $target = $(this);
       (offTimer = $target.data("offTimer")) && clearTimeout(offTimer);
-      var contents = options.contents = $.isFunction(options.contents)
-        ? options.contents()
-        : (options.contents || $target.attr("title") || $target.attr("alt"));
-      var isNew = !($balloon = $target.data("balloon"));
+      contents = $.isFunction(options.contents) ? options.contents()
+        : (options.contents || (options.contents = $target.attr("title") || $target.attr("alt")));
+      isNew = !($balloon = $target.data("balloon"));
       if(isNew) $balloon = $("<div>").append(contents);
       if(!options.url && (!$balloon || $balloon.html() == "")) return;
       if(!isNew && contents && contents != $balloon.html()) $balloon.empty().append(contents);
