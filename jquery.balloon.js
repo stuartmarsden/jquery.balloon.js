@@ -199,7 +199,7 @@
       var isNew, contents;
       $target = $(this);
       (offTimer = $target.data("offTimer")) && clearTimeout(offTimer);
-      contents = $.isFunction(options.contents) ? options.contents()
+      contents = $.isFunction(options.contents) ? options.contents.apply(this)
         : (options.contents || (options.contents = $target.attr("title") || $target.attr("alt")));
       isNew = !($balloon = $target.data("balloon"));
       if(isNew) $balloon = $("<div>").append(contents);
@@ -234,6 +234,11 @@
           });
         }
       }, options.delay));
+	  if (options.timeout) {
+		setTimeout(function() {
+			$target.hideBalloon();
+		}, options.timeout);
+	  }
     });
   };
   $.fn.hideBalloon = function() {
@@ -259,7 +264,7 @@
     defaults: {
       contents: null, url: null, ajaxComplete: null, classname: null,
       position: "top", offsetX: 0, offsetY: 0, tipSize: 12,
-      delay: 0, minLifetime: 200,
+      delay: 0, minLifetime: 200, timeout: 0,
       showDuration: 100, showAnimation: null,
       hideDuration:  80, hideAnimation: function(d) { this.fadeOut(d); },
       showComplete: null, hideComplete: null,
